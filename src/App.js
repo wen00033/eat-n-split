@@ -25,6 +25,17 @@ function App() {
     setShow(false);
   }
 
+  function splitHandler(value) {
+    console.log(value);
+    setFriend((friends) =>
+      friends.map((el) =>
+        el.id === select.id ? { ...el, balance: el.balance + value } : el
+      )
+    );
+    setSelect(false);
+    // updated friend and override friend balance valueoverride balance property
+  }
+
   return (
     <div className="app">
       <div className="sidebar">
@@ -40,7 +51,9 @@ function App() {
         )}
         <Button onClick={ShowHandler}>{show ? "close" : "add friend"}</Button>
       </div>
-      {select && <FormSplitField selection={select} />}
+      {select && (
+        <FormSplitField selection={select} splitHandler={splitHandler} />
+      )}
     </div>
   );
 }

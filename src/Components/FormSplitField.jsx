@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./Btn";
 
-function FormSplitField({ selection }) {
+function FormSplitField({ selection, splitHandler }) {
   const [bill, setBill] = useState("");
   const [expense, setExpense] = useState("");
   const paidByFriend = bill ? bill - expense : "";
@@ -9,6 +9,7 @@ function FormSplitField({ selection }) {
   function handleSubmit(e) {
     e.preventDefault();
     if (!bill || !paidByFriend) return;
+    splitHandler(whopaid === "user" ? paidByFriend : -expense);
   }
 
   return (
